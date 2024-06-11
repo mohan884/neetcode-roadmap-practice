@@ -8,48 +8,36 @@ The stings in the list can contain any UTF character which makes it difficult to
 - After we're done, we can just traverse the string and add some state to the stateless joined string.
 
 */
-// Checks if a given string represents a valid number.
-function isValidNumber(str: string): boolean {
-    const nums = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]; // Just a list of strings as numbers
-
-    for (const char of str) { // Check if the current character is a number
-        if (!nums.includes(char)) {
-            return false;
-        }
-    }
-
-    return true;
-}
 
 // Encodes an array of strings into a single string.
 function encode(input: string[]): string {
-    let res = ""; // This will be used for appending the results
+  let res = ""; // This will be used for appending the results
 
-    for (const str of input) {
-        res += `${str.length}#${str}`; // The length should be prepended before the delimiter
-    }
+  for (const str of input) {
+    res += `${str.length}#${str}`; // The length should be prepended before the delimiter
+  }
 
-    return res;
+  return res;
 }
 
 // Decodes a single encoded string back into an array of strings.
 function decode(input: string) {
-    const res = []; // This will be used for storing the decoded list of strings.
-    let i = 0; // This will be used for tracking the start of each word.
- 
-    do {
-        let j = i; // Move J to the starting of the new word
-        while (input[j] !== "#") j++; // Find the position of the '#' delimiter
+  const res = []; // This will be used for storing the decoded list of strings.
+  let i = 0; // This will be used for tracking the start of each word.
 
-        let length = parseInt(input.substring(i, j)); // Before # everything will be a number
+  do {
+    let j = i; // Move J to the starting of the new word
+    while (input[j] !== ";") j++; // Find the position of the '#' delimiter
 
-        i = j + 1; // Move to the position after the '#' delimiter
-        j = i + length; // Calculate the end position of the string
-        res.push(input.substring(i, j)); // Extract and push the decoded string into the result array
-        i = j; // Move the index to the next starting position for decoding
-    } while (i < input.length); // Continue until the end of the encoded string
+    let length = parseInt(input.substring(i, j)); // Before # everything will be a number
 
-    return res; // Return the decoded array of strings
+    i = j + 1; // Move to the position after the '#' delimiter
+    j = i + length; // Calculate the end position of the string
+    res.push(input.substring(i, j)); // Extract and push the decoded string into the result array
+    i = j; // Move the index to the next starting position for decoding
+  } while (i < input.length); // Continue until the end of the encoded string
+
+  return res; // Return the decoded array of strings
 }
 
 /* ------------------------------- Test Cases ------------------------------- */

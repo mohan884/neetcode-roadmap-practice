@@ -22,13 +22,13 @@ function productExceptSelf(nums: number[]): number[] {
 
     // First pass - Prefix
     for (let i = 0; i < nums.length; i++) {
-        res[i] = prefix; // Add the prefix product value to the resulting array first
+        res[i] *= prefix; // Add the prefix product value to the resulting array first
         prefix *= nums[i]!; // multiply the next item from the original array to get the prefix to that point.
     }
 
     // Second pass - Postfix
     for (let i = nums.length - 1; i >= 0; i--) {
-        res[i] = postfix; // Add the postfix product value to the resulting array first
+        res[i] *= postfix; // Add the postfix product value to the resulting array first
         postfix *= nums[i]!; // multiply the previous item from the original array to get the postfix till that point.
     }
 
@@ -37,5 +37,5 @@ function productExceptSelf(nums: number[]): number[] {
 
 /* ------------------------------- Test Cases ------------------------------- */
 
-const arr = [1, 2, 3, 4];
+const arr = [-1, 1, 0, -3, 3];
 console.log(productExceptSelf(arr));

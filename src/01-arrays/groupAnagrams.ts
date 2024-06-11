@@ -16,19 +16,19 @@ function groupAnagrams(strs: string[]): string[][] {
     const anagrams = new Map<string, string[]>(); // Store the alphabet array as key and list of strings as value.
 
     for (let str of strs) { // Iterate over each string in the list
-        const charCount = new Array(26).fill(0); // Create an alphabet array with 0 as initial value.
+        const alphabets = new Array(26).fill(0); // Create an alphabet array with 0 as initial value.
 
         for (let char of str) { // Get the alphabet array for each of the string.
             const code = char.charCodeAt(0) - "a".charCodeAt(0); // Calculate the character code for each char in string,
-            charCount[code]++; // If the character appears in the string, increment the value in the array.
+            alphabets[code]++; // If the character appears in the string, increment the value in the array.
         }
 
-        const charCountString = charCount.join(","); // Since JS can't compare 2 strings by their elements, we need to convert it into string.
-        if (anagrams.has(charCountString)) { // Check if the alphabet array is already in the map
+        const freqString = alphabets.join(","); // Since JS can't compare 2 strings by their elements, we need to convert it into string.
+        if (anagrams.has(freqString)) { // Check if the alphabet array is already in the map
              // set the key as alphabet array and value as list of strings after fetching list of strings first.
-            anagrams.set(charCountString, [ ...anagrams.get(charCountString)!, str]);
+            anagrams.set(freqString, [ ...anagrams.get(freqString)!, str]);
         } else { // If there is no matching alphabet array, then add a single element to the correspoinding key.
-            anagrams.set(charCountString, [str]);
+            anagrams.set(freqString, [str]);
         }
     }
 

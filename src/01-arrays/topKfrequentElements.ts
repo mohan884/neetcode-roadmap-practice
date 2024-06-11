@@ -37,12 +37,11 @@ function topKFrequent(nums: number[], k: number): number[] {
     if (nums.length === k) return nums; // The list is already made of top K elements
 
     const freq: Map<number, number> = new Map(); // For storing the frequency { number: count }
-    const buckets: Array<Array<number>> = new Array(nums.length + 1); // Stores list of nums and values and uses count as index
- 
     for (let i = 0; i < nums.length; i++) { // Count frequency for each number in nums
         freq.set(nums[i]!, (freq.get(nums[i]!) || 0) + 1);
     }
-
+    
+    const buckets: Array<Array<number>> = new Array(nums.length + 1); // Stores list of nums and values and uses count as index
     for (const [num, count] of freq) { // Create buckets with count as index and numbers as list of values
         if (!buckets[count]) buckets[count] = []; // If there is no bucket for current index, create one
         buckets[count]!.push(num); // Push the number to the bucket.
